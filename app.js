@@ -66,7 +66,7 @@ app.get('/places/new', function(req, res) {
 
 
 //create
-app.post('place', function(req, res) {
+app.post('/place', function(req, res) {
     var name = req.body.name;
     var image = req.body.image;
     var description = req.body.description;
