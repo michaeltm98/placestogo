@@ -3,14 +3,13 @@
 <div class="container">
 
 
-            <div class="center text-center justify-content-center" style="display:flex; flex-wrap: wrap">
+            <div class="row text-center" style="display:flex; flex-wrap: wrap">
           
                 
-                <div style="display: flex;" class="justify-content-center">
+                <div style="display: flex;" id="place" class="col-md-3 col-sm-6">
                     <div class="thumbnail">
                         <div class="caption"><%=place.name %></div>
                         <img src="<%=place.image%>" alt="">
-			<p><%=place.description%></p>
                     </div>
                
                 </div>

@@ -19,3 +19,8 @@ i.icon {
     transform-origin: bottom;
     cursor: pointer;
 }
+
+.center {
+    margin: auto;
+    width: 50%;
+  }
