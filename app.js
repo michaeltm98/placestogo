@@ -2,8 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
-const port = 9000;
-var http = require('http');
 
 mongoose.connect('mongodb://localhost:27017/placestogo', {useNewUrlParser: true});
 
@@ -42,7 +40,7 @@ function createPlace() {
 
 
 app.listen(8080, function() {
-    console.log("Server is listening on port 9000...")
+    console.log("Server is listening on port 8080...")
 });
 
 app.get('/', function(req, res) {
