@@ -3,19 +3,23 @@
 <div class="container">
 
 
-            <div class="center text-center justify-content-center" style="display:flex; flex-wrap: wrap">
+          <h1 class="center justify-content-center" style="padding: 30px;"><%=place.name %></h1>
+            <div class="center text-center justify-content-center" style="display:flex; flex-wrap: wrap;  text-align: center;">
           
                 
                 <div style="display: flex;" class="justify-content-center">
+                    
                     <div class="thumbnail">
-                        <div class="caption"><%=place.name %></div>
                         <img src="<%=place.image%>" alt="">
-			<p><%=place.description%></p>
+			            <p style="padding: 10px"><%=place.description%></p>
                     </div>
-               
                 </div>
-            
-   
+                <!-- <a href="/places/<%= place._id %>/delete"><Button class="ui red button">Delete</Button></a>
+                <Button class="ui blue button">Edit</Button> -->
+                <a href="/places/<%= place._id %>/edit" ><button class="ui blue button" >Edit</button></a>
+                <form id="deleteForm" action="/places/<%= place._id %>?_method=DELETE" method="POST">
+                    <button class="ui red button">Delete</button>
+                </form>
             </div>
 
 </div>

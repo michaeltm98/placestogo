@@ -1,2 +1,30 @@
-    </body>
+   
+   <script>
+        $('#name').keyup(function() {
+            $('#namemirror').text($(this).val());
+            console.log("in val statement", $(this).val())
+        });
+
+        $('#image').keyup(function() {
+
+            if($(this).val() === "") {
+                $('#imagemirror').attr("src", "https://www.steppingstonetheatre.org/wp-content/plugins/post-grid/assets/frontend/css/images/placeholder.png");
+            }
+            else {
+                $('#imagemirror').attr("src", $(this).val());
+                if($('#imagemirror').attr('src').width === 0) {
+                    $('#imagemirror').attr("src", "https://www.steppingstonetheatre.org/wp-content/plugins/post-grid/assets/frontend/css/images/placeholder.png");
+                }
+            }
+
+            
+            console.log("in val statement", $(this).val())
+        });
+
+        $('#description').keyup(function() {
+            $('#descriptionmirror').text($(this).val());
+            console.log("in val statement", $(this).val())
+        });
+   </script>
+   </body>
 </html>

@@ -24,3 +24,14 @@ i.icon {
     margin: auto;
     width: 50%;
   }
+
+p {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    max-width: 3000rem;
+    white-space: normal;
+    display: block;
+    text-align: center;
+}
