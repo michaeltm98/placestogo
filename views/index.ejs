@@ -8,11 +8,13 @@
     </header>
     <div class="row text-center" style="display:flex; flex-wrap: wrap">
             <% places.forEach(function(place) { %>
+                <a href="/places/<%= place._id %>">
                 <div style="display: flex;" id="place" class="col-md-3 col-sm-6">
                     <div class="thumbnail">
                         <div class="caption"><%=place.name %></div>
                         <img src="<%=place.image%>" alt="">
                     </div>
+                </a>
                 </div>
             
             <% }) %>

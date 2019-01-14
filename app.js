@@ -64,6 +64,17 @@ app.get('/places/new', function(req, res) {
     res.render('new');
 });
 
+app.get('/places/:id', function(req, res) {
+    var id = req.params.id;
+    Place.findById(id, function(err, place) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("show", {place, place});
+        }
+    })
+})
+
 
 //create
 app.post('place', function(req, res) {
