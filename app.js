@@ -46,7 +46,7 @@ app.listen(8080, function() {
 });
 
 app.get('/', function(req, res) {
-    res.render("index", {places: places});
+    res.redirect('/places');
 });
 
 app.get('/places', function(req, res) {
@@ -59,6 +59,11 @@ app.get('/places', function(req, res) {
             res.render('index', {places: places})
         }
     });
+});
+
+//NEW
+app.get('/places/new', function(req, res) {
+    res.render('new');
 });
 
 
