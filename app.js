@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const methodOverride = require("method-override");
 
+var Place = require("./models/place")
 mongoose.connect('mongodb://localhost:27017/placestogo', {useNewUrlParser: true});
 
 app.set("view engine", "ejs");
@@ -11,26 +12,9 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
-var places = [
-    {name: "Machu Picchu", image: "https://media-cdn.tripadvisor.com/media/photo-s/02/5c/5c/8a/a-voir-absolument.jpg"},
-    {name: "Spain", image: "https://exclusivesmedia.webjet.com.au/uploads/2018/08/Highlights-Spain-2.jpg"},
-    {name: "Mount Assiniboine Provincial Park", image: "https://s-i.huffpost.com/gadgets/slideshows/484816/slide_484816_6655992_compressed.jpg"},
-        {name: "Machu Picchu", image: "https://media-cdn.tripadvisor.com/media/photo-s/02/5c/5c/8a/a-voir-absolument.jpg"},
-    {name: "Spain", image: "https://exclusivesmedia.webjet.com.au/uploads/2018/08/Highlights-Spain-2.jpg"},
-    {name: "Mount Assiniboine Provincial Park", image: "https://s-i.huffpost.com/gadgets/slideshows/484816/slide_484816_6655992_compressed.jpg"},
-        {name: "Machu Picchu", image: "https://media-cdn.tripadvisor.com/media/photo-s/02/5c/5c/8a/a-voir-absolument.jpg"},
-    {name: "Spain", image: "https://exclusivesmedia.webjet.com.au/uploads/2018/08/Highlights-Spain-2.jpg"},
-    {name: "Mount Assiniboine Provincial Park", image: "https://s-i.huffpost.com/gadgets/slideshows/484816/slide_484816_6655992_compressed.jpg"},
-     ]
 
 
-var placeSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
 
-var Place = mongoose.model("Place", placeSchema);
 
 
 

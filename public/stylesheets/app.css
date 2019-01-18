@@ -35,3 +35,19 @@ h1 {
     display: block;
     text-align: center;
 }
+
+.commentButton {
+    float: right;
+}
+
+.clearfix {
+    overflow: auto;
+  }
+
+  a, ul {
+    text-decoration: none !important;
+  }
+
+  textarea{
+    resize:none !important;
+}

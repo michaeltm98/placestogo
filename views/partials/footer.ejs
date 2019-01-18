@@ -25,6 +25,53 @@
             $('#descriptionmirror').text($(this).val());
             console.log("in val statement", $(this).val())
         });
+
+        $('#newcomment').on('shown.bs.collapse', function (e) {
+            $('#newcommentbox').focus();
+        })
+
+
+
+        if(localStorage.getItem("user") == null) {
+            swalAlert();
+        }
+
+        function swalAlert() {
+            swal({
+            title: "Are you Rebecca or Michael?",
+            buttons: {
+                Rebecca: {
+                    text: "Rebecca",
+                    value: "Rebecca",
+                    },
+                Michael: {
+                    text: "Michael",
+                    value: "Michael"
+                },
+            },
+            }).then((value) => {
+                switch(value) {
+                    case "Michael":  isUserMichael(); break;
+                    case "Rebecca": localStorage.setItem("user", "Rebecca"); break;
+                    default: swalAlert();
+                }
+            });
+        }
+
+        function isUserMichael() {
+            swal({
+                text: 'What was your first mind blowing video game?',
+                content: "input",
+                }).then((value) => {
+                    if(value == "Oblivion") {
+                        localStorage.setItem("user", "Michael");
+                    }
+                    else {
+                        swalAlert();
+                    }
+                })
+        }
+
    </script>
    </body>
 </html>
