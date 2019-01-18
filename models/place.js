@@ -6,8 +6,10 @@ var placeSchema = new mongoose.Schema({
     description: String,
     comments: [
         {
+            author: String,
             message: String,
-            date: Date
+            date: Date,
+            id: String
         }
     ]
 });

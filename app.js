@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const methodOverride = require("method-override");
+const uuidv4 = require('uuid/v4');
 
 var Place = require("./models/place")
 mongoose.connect('mongodb://localhost:27017/placestogo', {useNewUrlParser: true});
@@ -13,13 +14,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
 
-
+var currentUser;
 
 
 
 
 app.get('/', function(req, res) {
     res.redirect('/places');
+});
+
+app.post('/user', function(req, res) {
+    currentUser = req.body.user;
 });
 
 app.get('/places', function(req, res) {
@@ -60,7 +65,7 @@ app.get('/places/:id/edit', function(req, res) {
         else {
             res.render('edit', {place: place});
         }
-    })
+    });
 })
 
 app.put('/places/:id', function(req, res) {
@@ -106,6 +111,65 @@ app.post('/places', function(req, res) {
         }
     });
 });
+
+app.put('/places/:id/comment', function(req, res) {
+
+
+    if(req.body.comment === "") return;
+
+    var id = req.params.id;
+    var newComment = {
+        author: currentUser,
+        message: req.body.comment,
+        date: Date(),
+        id: uuidv4()
+    }
+    console.log(newComment)
+    console.log(currentUser)
+
+    Place.findById(id, function(err, place) {
+        if (err) {
+            console.log(err);
+        } else {
+            place.comments.push(newComment);
+
+            Place.findByIdAndUpdate(id, place, function(err, place) {
+                if(err) {
+                    console.log("could not update")
+                }
+                else {
+                    res.redirect(`/places/${id}`);
+                }
+            });
+        }
+    });
+});
+
+app.delete('/places/:id/comment/:commentid', function(req, res) {
+    var id = req.params.id;
+    Place.findById(id, function(err, place) {
+        if (err) {
+            console.log(err);
+        } else {
+            newComments = place.comments.filter(function(comment) {
+                return comment.id != req.params.commentid;
+            });
+
+            place.comments = newComments;
+
+            Place.findByIdAndUpdate(id, place, function(err, place) {
+                if(err) {
+                    console.log("could not update")
+                }
+                else {
+                    res.redirect(`/places/${id}`);
+                }
+            });
+        }
+    });
+})
+
+
 
 
 

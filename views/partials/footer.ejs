@@ -35,6 +35,9 @@
         if(localStorage.getItem("user") == null) {
             swalAlert();
         }
+        else {
+            postUsername();
+        }
 
         function swalAlert() {
             swal({
@@ -52,7 +55,7 @@
             }).then((value) => {
                 switch(value) {
                     case "Michael":  isUserMichael(); break;
-                    case "Rebecca": localStorage.setItem("user", "Rebecca"); break;
+                    case "Rebecca": localStorage.setItem("user", "Rebecca"); postUsername(); break;
                     default: swalAlert();
                 }
             });
@@ -65,12 +68,102 @@
                 }).then((value) => {
                     if(value == "Oblivion") {
                         localStorage.setItem("user", "Michael");
+                        postUsername();
                     }
                     else {
                         swalAlert();
                     }
                 })
         }
+
+        function postUsername() {
+            $.post(
+                "http://localhost:8080/user",
+                { user: localStorage.getItem("user")},
+                function(data) {
+                    alert("Response: " + data);
+                }
+            );
+        }
+
+
+
+        // $("#commentsarrowicon").click(function() {
+        //     this.style.transform = "rotate(0)";
+        //     alert(window.getComputedStyle($(this)).transform)
+        //     if (window.getComputedStyle(this).transform == "matrix(1, 0, 0, 1, 0, 0)") {
+        //         this.style.transform = "rotate(180deg)";
+        //     }
+        // })
+
+        // document.getElementById("commentslink").addEventListener("click", function() {
+        //     var element = document.getElementById("commentsarrowicon");
+            
+            
+        //     if(window.getComputedStyle(element).transform === "matrix(1, 0, 0, 1, 0, 0)"){
+        //         element.style.webkitAnimationDuration = "2s"
+        //         element.style.webkitTransform = "rotate(180deg)";
+        //     }
+        //     else {
+        //         element.style.transform = "rotate(0deg)";
+        //     }
+        // })
+        var element = document.getElementById("commentsarrowicon");
+        element.style.transform = "rotate(180deg)";
+
+        document.getElementById("commentslink").addEventListener("click", function() {
+           
+
+
+            if(window.getComputedStyle(element).transform === "matrix(1, 0, 0, 1, 0, 0)") {
+                $("#commentsarrowicon").addClass('animateup')
+                setTimeout(function() {
+                    element.style.transform = "rotate(180deg)";
+                    $("#commentsarrowicon").removeClass('animateup');
+                }, 500);
+            }
+            else {
+                $("#commentsarrowicon").addClass('animatedown')
+                setTimeout(function() {
+                    element.style.transform = "rotate(0deg)";
+                    $("#commentsarrowicon").removeClass('animatedown');
+                }, 500);
+            }
+        });
+
+        $("#newcommentbutton").click(function() {
+            if($("#newcommentbutton").hasClass("green")) {
+                $("#newcommentbutton").removeClass("green")
+                $("#newcommentbutton").text("Cancel");
+                $("#newcommentbutton").addClass("basic red");
+            }
+            else {
+                $("#newcommentbutton").removeClass("basic red")
+                $("#newcommentbutton").text("New comment");
+                $("#newcommentbutton").addClass("green");
+                $("#newcommentbox").val("");
+            }
+        })
+
+
+
+        // Get the input field
+        var input = document.getElementById("newcommentbox");
+
+        // Execute a function when the user releases a key on the keyboard
+        input.addEventListener("keydown", function(event) {
+        // Cancel the default action, if needed
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            event.preventDefault();
+
+            // Trigger the button element with a click
+            document.getElementById("submitcommentbutton").click();
+        }
+        });
+
+
+            
 
    </script>
    </body>
