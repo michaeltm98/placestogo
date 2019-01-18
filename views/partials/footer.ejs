@@ -35,9 +35,6 @@
         if(localStorage.getItem("user") == null) {
             swalAlert();
         }
-        else {
-            postUsername();
-        }
 
         function swalAlert() {
             swal({
@@ -84,6 +81,11 @@
                     alert("Response: " + data);
                 }
             );
+        }
+
+        setUser();
+        function setUser() {
+            $("#authorfield").val(localStorage.getItem("user"));
         }
 
 

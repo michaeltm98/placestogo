@@ -114,18 +114,18 @@ app.post('/places', function(req, res) {
 
 app.put('/places/:id/comment', function(req, res) {
 
-
+    console.log(req.body);
     if(req.body.comment === "") return;
 
     var id = req.params.id;
     var newComment = {
-        author: currentUser,
+        author: req.body.author,
         message: req.body.comment,
         date: Date(),
         id: uuidv4()
     }
-    console.log(newComment)
-    console.log(currentUser)
+    // console.log(newComment)
+    // console.log(currentUser)
 
     Place.findById(id, function(err, place) {
         if (err) {
